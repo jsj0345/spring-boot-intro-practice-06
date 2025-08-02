@@ -3,7 +3,7 @@ package hello.hello_spring;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication // Spring Boot 앱을 간편하게 실행하고 자동 설정 및 컴포넌트 검색 , 전체 시스템을 실행하는 엔진
 public class HelloSpringApplication {
 
 	public static void main(String[] args) {
@@ -18,7 +18,7 @@ public class HelloSpringApplication {
 	코드 실행을 끄고 localhost:8080으로 가면 아무 것도 안뜸.
 
 	메인 메서드를 보면 ..
-	HelloSpringApplication 클래스를 run에 넣어주면 @SpringBootApplication 이걸로 인해
+  //	HelloSpringApplication 클래스를 run에 넣어주면 @SpringBootApplication 이걸로 인해
 	SpringBootApplication이 실행 . Tomcat이라는 웹 서버를 띄움.
 
 	메뉴로 가면 Settings 에 Gradle을 보면 Build and run using: Intellij IDEA

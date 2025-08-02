@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<p th:text="'hello ' + ${name}">hello! empty</p>
+</body>
+</html>
+
+<!--
+
+thymeleaf의 장점은 뭘까?
+
+원래 애플리케이션을 작동 시켜야 파일을 볼 수 있는데
+
+hello-template파일에 우 마우스를 하면 Copy path/Reference에서 Absoluter path가 뜬다.
+
+이 path를 url에 그대로 집어 넣으면
+
+프로그램 실행 없이 html 소스 파일을 볼수 있다.
+
+스프링부트 애플리케이션을 실행 하지 않았으니 hello! empty가 나옴.
+
+${name} 여기서 name이 바뀜. addAttribute에서 key값인 name을 외부에서 받은 name을 value로 치환.
+
+
+
+-->

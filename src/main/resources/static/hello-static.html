@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>static content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+정적 컨텐츠 입니다.
+</body>
+</html>
+
+
+<!--
+localhost:8080/hello-static.html로 url 주소를 치면
+
+정적 컨텐츠 입니다. 라고 나온다.
+
+원래 Spring에서는 @SpringBootApplication 어노테이션에서 시작하여
+
+@Controller 어노테이션으로 감.
+
+근데 이때 url을 보고 Controller에 있는지 먼저 파악.
+
+@GetMapping(~~)가 있을텐데 url에서 localhost:8080 / (/ 이후 내용과 같은게 없을 때)
+static 파일 아래서 url이랑 일치하는게 있는지 확인.
+-->
