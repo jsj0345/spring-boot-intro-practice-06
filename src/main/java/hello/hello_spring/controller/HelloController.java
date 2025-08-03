@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /*
 맨 처음에 start.spring.io 에서 프로젝트 생성..
@@ -38,6 +39,50 @@ public class HelloController {
     return "hello-template";
     // http://localhost:8080/hello-mvc?name=spring!!!!!!
   }
+
+  // 만약에 GetMapping에 들어가 있는 문자열이 없으면 static 아래에 있는 파일을 찾음.
+
+  @GetMapping("hello-string")
+  @ResponseBody // http 바디부에 데이터를 직접 넣어주겠다는 의미.
+  public String helloString(@RequestParam("name") String name) {
+    return "hello " + name; // html을 거치지 않고 그대로 데이터를 내놓아줌.
+    // 문자를 던지면 문자 그대로 나오게함.
+  }
+
+  @GetMapping("hello-api")
+  @ResponseBody
+  public Hello helloApi(@RequestParam("name") String name) {
+    Hello hello = new Hello();
+    hello.setName(name);
+    return hello;  // JSON 방식으로 출력 key,value
+    // return 객체면 JSON 방식으로 출력하는게 default
+
+    /*
+    일단 @ResponseBody가 없으면 정적 컨텐츠 및 MVC 패턴으로 웹 개발을 한다고 봐도된다.
+    @ResponseBody가 있으면
+    1. 기본 문자처리: StringHttpMessageConverter
+    2. 기본 객체처리: MappingJackson2HttpMessageConverter
+
+    MVC 패턴은 url에 GetMapping과 일치한게 있으면 ..
+    templates 하단에 있는 html 파일을 리턴.
+
+    만약에 GetMapping과 일치한게 없다?
+    이제 이러면 static 하단에 있는 파일들을 찾는것.
+     */
+  }
+
+  static class Hello { // 중첩 클래스
+    private String name;
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
+  }
+
 
 
 
@@ -120,5 +165,18 @@ _________________________________________________________________________
 
 3. API
 -> JSON 데이터 포맷으로 클라이언트한테 데이터 전달.
+
+_________________________________________________________________________
+
+@Controller
+public class HelloController {
+
+  @GetMapping("hello")
+  public String hello(Model model) {
+    model.addAttribute("data", "hello!!");
+    return "hello";
+  }
+
+}
  */
 
