@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.id}"></td>
+                <td th:text="${member.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
+
+<!--
+model.addAttribute("members",members); html 파일에 있는 ${members} 의 value값을  members로 받음.
+members는 리스트임. (member 객체가 담긴 리스트)
+이 리스트에 각 요소에 접근해서 getter를 이용해서 값을 꺼냄(id,name)
+-->

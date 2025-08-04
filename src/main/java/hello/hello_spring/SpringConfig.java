@@ -31,3 +31,20 @@ public class SpringConfig {
     return new MemoryMemberRepository();
   }
 }
+
+/*
+@Configuration
+public class SpringConfig {
+
+  @Bean
+  public MemberService memberService() {
+    return new MemberService(memberRepository());
+  }
+
+  @Bean
+  public MemberRepository memberRepository() {
+    return new MemoryMemberRepository();
+  }
+
+}
+ */

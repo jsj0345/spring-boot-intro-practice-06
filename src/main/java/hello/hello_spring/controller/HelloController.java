@@ -23,7 +23,7 @@ JDK, SDK의 버전 문제가 있었음. 이거를 17로 맞춰주는게 좋음.
 @Controller
 public class HelloController {
 
-  @GetMapping("hello") // 만약에 GetMapping에 아무 것도 없으면 static 아래에 있는 파일을 찾는다. 단 파일은 index.html만..
+  @GetMapping("hello") //url 주소에 GetMapping 안에 들어간 문자열이 없을때, static 하단 파일로감.(ViewResolver로 안감!)
   public String hello(Model model) {  // 여기서 model은 스프링에서 알아서 객체를 주입 해줌. 즉 컨트롤러는 Model에 의존.
 
     // 위에 GetMapping("hello")는 /hello를 웹에서 마주치는 순간 GetMapping 아래에 있는 메서드로 감.
@@ -178,5 +178,75 @@ public class HelloController {
   }
 
 }
+
+_________________________________________________________________________
+@Controller
+public class HelloController {
+
+  @GetMapping("hello")
+  public String Hello(Model model) {
+    model.addAttribute("data","spring!!!");
+    return "hello";
+  }
+
+  @GetMapping("hello-mvc")
+  public String helloMvc(@RequestParam("name") String name, Model model) { // RequestParam은 외부에서 이름을 받아야함. (true여서)
+    model.addAttribute("name", name); // url에서 받은 변수를 name으로. 즉 value값이 name
+    return "hello-template";
+  }
+
+  @GetMapping("hello-string")
+  @ResponseBody // http 바디부에 데이터를 직접 넣어주겠다는 의미.
+  public String helloString(@RequestParam("name") String name) {
+    return "hello " + name; // html을 거치지 않고 그대로 데이터를 내놓아줌.
+    // 문자를 던지면 문자 그대로 나옴.
+  }
+
+  @GetMapping("hello-api")
+  @ResponseBody
+  public Hello helloApi(@RequestParam("name") String name) {
+    Hello hello = new Hello();
+    hello.setName(name);
+    return hello; // JSON 방식으로 출력 key,value
+    // return 객체; 면 JSON 방식으로 출력하는게 default
+
+    일단 @ResponseBody가 없으면 정적 컨텐츠 및 MVC 패턴으로 웹 개발을 한다고 봐도된다.
+    @ResponseBody가 있으면
+    1. 기본 문자처리: StringHttpMessageConverter
+    2. 기본 객체처리 : MappingJackson2HttpMessageConverter
+
+    MVC 패턴은 url에 GetMapping과 일치한게 있으면..
+    templates 하단에 있는 html 파일을 리턴.
+
+    만약에 GetMapping과 일치한게 없다?
+    이제 이러면 static 하단에 있는 파일들을 찾는 것.
+  }
+
+  static class Hello {
+    private String name;
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
  */
 

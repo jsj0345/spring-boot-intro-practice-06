@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <form action="/members/new" method="post"> <!-- 값읍 입력할수 있는 태그-->
+        <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+            <!--
+            input type은 text고 name은 key
+
+            method="post"라고 나와있는데 이건 뭘까?
+
+            HTML의 <form method="post">는 브라우저가 POST 방식으로 요청을 보낸다는 뜻.
+
+            HTML에서 지정한 action 경로와 PostMapping경로가 일치하면 컨트롤러가 실행 됨.
+
+            name="name"에서 "name"은 spring에서 MemberForm에 있는 name으로 인식 시켜줌.
+
+            -->
+        </div>
+        <button type="submit">등록</button>
+    </form>
+</div> <!-- /container -->
+</body>
+</html>
+
+<!--
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+  <form action="/members/new" method="post"> // 값을 입력할수 있는 태그
+     <div class="form-group">
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+        input type은 text고 name은 key
+
+        method="post"라고 나와있는데 이건 뭘까?
+
+        HTML의 <form method="post">는 브라우저가 POST 방식으로 요청을 보낸다는 뜻.
+
+        HTML에서 지정한 action의 경로와 PostMapping의 경로가 일치하면 컨트롤러가 실행 됨.
+
+        name="name"에서 "name"은 spring에서 MemberForm에 있는 name으로 인식 시켜줌.
+     </div>
+     <button type="submit">등록</button>
+  </form>
+  -->
+
+
