@@ -232,5 +232,32 @@ public String list(Model model) {
   return "members/memberList";
 }
 
+
+@Controller
+public class MemberController {
+
+  private final MemberService memberService;
+
+  @Autowired
+  public MemberController(MemberService memberService) {
+    this.memberService = memberService;
+  }
+
+  -생성자에 @Autowired가 있으면 스프링이 연관된 객체를 스프링 컨테이너에서 찾아서 넣어준다.
+  이렇게 객체 의존관계를 외부에서 넣어주는 것을 DI(Dependency Injection), 의존성 주입이라 한다.
+
+  이전 테스트에서는 개발자가 직접 주입하고, 여기서는 @Autowired에 의해 스프링이 주입해준다.
+
+  스프링 빈을 등록하는 2가지 방법
+  - 컴포넌트 스캔과 자동 의존관계 설정
+  - 자바 코드로 직접 스프링 빈 등록하기
+
+  컴포넌트 스캔 원리
+  @Component 애노테이션이 있으면 스프링 빈으로 자동 등록된다.
+  @Controller 컨트롤러가 스프링 빈으로 자동 등록된 이유도 컴포넌트 스캔 때문이다.
+
+
+
+
  */
 

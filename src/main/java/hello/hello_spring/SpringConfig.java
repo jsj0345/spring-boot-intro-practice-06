@@ -47,4 +47,20 @@ public class SpringConfig {
   }
 
 }
+
+@Configuration
+public class SpringConfig {
+
+  @Bean
+  public MemberService memberService() {
+    return new MemberService(new memberRepository()); // 직접 Bean으로 등록하여 스프링이 인식 할 수 있게 해보기
+
+  }
+
+  @Bean
+  public MemberRepository memberRepository() {
+    return new MemberRepository();
+  }
+
+}
  */

@@ -7,6 +7,8 @@ import java.util.Optional;
 
 /*
 Repository는 domain을 DB에 저장하거나 불러오는 통로.
+
+Repository는 domain을 DB에 저장하거나 불러오는 통로.!
  */
 
 public interface MemberRepository {
@@ -34,6 +36,14 @@ public interface MemberRepository {
   Optional<Member> findByName(String name);
   List<Member> findAll();
 }
+
+public interface MemberRepository {
+  Member save(Member member);
+  Optional<Member> findById(Long id);
+  Optional<Member> findByName(String name);
+  List<Member> findAll();
+}
+
 
  */
 

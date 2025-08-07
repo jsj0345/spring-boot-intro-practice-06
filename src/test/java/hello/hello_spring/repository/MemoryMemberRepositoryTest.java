@@ -43,6 +43,20 @@ class MemoryMemberRepositoryTest {
 
     Member result = repository.findByName("spring1").get();
 
+    /*
+    Optional<Member> 객체는 생성자를 명시적으로 호출하지 않았는데, 어떻게 Optional 내부에 Member 타입 value가 채워진 객체가 생성되어 반환되는가?
+
+    -> 답변: findAny() 메서드는 Optional<T>를 반환
+    근데 자바 내부에서 return Optional.of(element);를 호출
+    여기서 of 메서드는 다음과 같음.
+
+    public static <T> Optional<T> of(T value) {
+        return new Optional<>(Objects.requireNonNull(value));  // 여기서 생성자 호출
+    }
+
+    그래서 생성자 초기화가 된 것.
+     */
+
 
     Assertions.assertThat(result).isEqualTo(member1); // 초록불이 뜨면 정상적임.
 
@@ -80,6 +94,7 @@ class MemoryMemberRepositoryTest {
 
   MemoryMemberRepository repository = new MemoryMemberRepository();
 
+
   @AfterEach
   public void afterEach() {
     repository.clearStore();
@@ -95,29 +110,13 @@ class MemoryMemberRepositoryTest {
     repository.save(member);
 
     //then
-    Member result = repository.findById(member.getId()).get();
+    Member result = repository.findById(member.getId());
     assertThat(result).isEqualTo(member);
+
   }
 
   @Test
   public void findByName() {
-    //given
-    Member member1 = new Member();
-    member1.setName("spring");
-    repository.save(member1);
-
-    Member member2 = new Member();
-    member2.setName("spring2");
-
-    //when
-    Member result = repository.findByName("spring1").get();
-
-    //then
-    assertThat(result).isEqualTo(member1);
-  }
-
-  @Test
-  public void findAll() {
     //given
     Member member1 = new Member();
     member1.setName("spring1");
@@ -128,13 +127,29 @@ class MemoryMemberRepositoryTest {
     repository.save(member2);
 
     //when
-    List<Member> result = repository.findAll();
-
-    //then
-    assertThat(result.size()).isEqualTo(2);
+    Member result = repository.findByName("spring1").get();
   }
 
-}
+
+  @Test
+  public void findAll() {
+    Member member1 = new Member();
+    member1.setName("spring1");
+    repository.save(member1);
+
+    Member member2 = new Member();
+    member2.setName("spring2");
+    repository.save(member2);
+
+    List<Member> result = repository.findAll();
+
+    Assertions.assertThat(result.size()).isEqualTo(2);
+
+  }
+
+
+
+
 
 
 
